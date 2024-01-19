@@ -15,14 +15,15 @@ function App() {
     setBody(event.target.value)
   }
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = () => {
     const newTodo = {
       id: todo.length + 1,
       title,
       body,
       isDone: false
     }
-    setTodo([...todo, newTodo]);
+    if(title === '' || body === '') alert("내용을 추가하세요!");
+    else setTodo([...todo, newTodo]);
     setTitle("")
     setBody("");
   }
@@ -30,6 +31,16 @@ function App() {
   const removeButtonHandler = (id) => {
     const filteredTodo = todo.filter((todo) => todo.id != id);
     setTodo(filteredTodo);
+  }
+
+  const todoUpdateButtonHandler = (id) => {
+    const updatedTodo = todo.map((item) => {
+      if (item.id === id) {
+        return {...item, isDone: !item.isDone};
+      }
+      return item;
+    })
+    setTodo(updatedTodo);
   }
 
   return (
@@ -60,7 +71,7 @@ function App() {
             <h1>{item.title}</h1>
             <p>{item.body}</p>
             <button onClick={() => removeButtonHandler(item.id)}>삭제</button>
-            <button>완료</button>
+            <button onClick={() => todoUpdateButtonHandler(item.id)}>완료</button>
           </div>
         ) //반드시 태그 붙이기(key) 그리고 중괄호 안에 리턴()
     })}
