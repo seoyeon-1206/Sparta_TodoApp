@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css';
-import TodoItem from './component/TodoItem';
+import TodoItem from './components/TodoItem';
+import TodoList from './components/\bTodoList';
+
 
 function App() {
   const [todo, setTodo] = useState([])
@@ -18,7 +20,7 @@ function App() {
 
   const onSubmitHandler = () => {
     const newTodo = {
-      id: Date.now(),
+      id: Date.now(), //고유한 id로 
       title,
       body,
       isDone: false
@@ -63,31 +65,19 @@ function App() {
         <button onClick={onSubmitHandler}>추가하기</button>
       </div>
 
-      <div>
-        <h3>Working</h3>
-        <div className='working-list'>
-          {todo.filter((item) => !item.isDone).map((item) =>
-            <TodoItem
-              key={item.id}
-              item={item}
-              onRemove={removeButtonHandler}
-              onUpdate={todoUpdateButtonHandler}
-            />
-          )}
-        </div>
-      </div>
+      <TodoList
+      items={todo.filter((item => !item.isDone))}
+      updateTitle="Working"
+      onRemove={removeButtonHandler}
+      onUpdate={todoUpdateButtonHandler}
+      />
 
-      <div>
-        <h3>Done</h3>
-        {todo.filter((item) => item.isDone).map((item) =>
-          <TodoItem
-            key={item.id}
-            item={item}
-            onRemove={removeButtonHandler}
-            onUpdate={todoUpdateButtonHandler}
-          />
-        )}
-      </div>
+<TodoList
+      items={todo.filter((item => item.isDone))}
+      updateTitle="Done"
+      onRemove={removeButtonHandler}
+      onUpdate={todoUpdateButtonHandler}
+      />
     </div>
   );
 }
