@@ -3,17 +3,18 @@ import TodoItem from "./TodoItem";
 
 const TodoList = ({items, onRemove, onUpdate, updateTitle}) => {
     return (
-        <div>
-        <h3>{updateTitle}</h3>
-        <div className='working-list'>
+        <div className="todo-list">
+        <div className="todo-list-title">{updateTitle}
+        <div className = "todo-list-group">
           {items.map((item) => (
-            <TodoItem
+            <TodoItem 
               key={item.id}
               item={item}
               onRemove={onRemove}
               onUpdate={onUpdate}
             />
           ))}
+        </div>
         </div>
       </div>
     );

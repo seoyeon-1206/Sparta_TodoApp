@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css';
-import TodoItem from './components/TodoItem';
 import TodoList from './components/\bTodoList';
 
 
@@ -48,36 +47,47 @@ function App() {
 
   return (
     <div className='app-style'>
-      <div>
+      <div className='app-name'>
         My Todo List
       </div>
-      <div>
-        제목 :&nbsp;
+      <div className='header'>
+        <div className='input-group'>
+        <div className='input-list'> 
+        <label>제목 :</label>
         <input
+          className='input-field'
           value={title}
           onChange={nameChangeHandler}
         />
-        내용 :&nbsp;
+        </div>
+        <div className='input-list'>
+        <label>내용 :</label>
         <input
+          className='input-field'
           value={body}
           onChange={bodyChangeHandler}
         />
-        <button onClick={onSubmitHandler}>추가하기</button>
+        </div>
+        </div>
+        
+        <button className= "submit-btn" onClick={onSubmitHandler}>추가하기</button>
       </div>
 
-      <TodoList
-      items={todo.filter((item => !item.isDone))}
-      updateTitle="Working"
-      onRemove={removeButtonHandler}
-      onUpdate={todoUpdateButtonHandler}
+      <div className='todo-list-section'> 
+      <TodoList 
+        items={todo.filter((item => !item.isDone))}
+        updateTitle="Working"
+        onRemove={removeButtonHandler}
+        onUpdate={todoUpdateButtonHandler}
       />
 
-<TodoList
-      items={todo.filter((item => item.isDone))}
-      updateTitle="Done"
-      onRemove={removeButtonHandler}
-      onUpdate={todoUpdateButtonHandler}
+      <TodoList
+        items={todo.filter((item => item.isDone))}
+        updateTitle="Done"
+        onRemove={removeButtonHandler}
+        onUpdate={todoUpdateButtonHandler}
       />
+      </div>
     </div>
   );
 }
