@@ -52,7 +52,7 @@ function App() {
       제목 :&nbsp;
       <input
       value ={title}
-      onChange={(event)=>nameChangeHandler(event)} //인자를 넣어줄때는 이렇게 함수로 감싸줌
+      onChange={nameChangeHandler} 
       />
       내용 :&nbsp;
       <input
@@ -73,7 +73,7 @@ function App() {
             <button onClick={() => removeButtonHandler(item.id)}>삭제</button>
             <button onClick={() => todoUpdateButtonHandler(item.id)}>완료</button>
           </div>
-        ) //반드시 태그 붙이기(key) 그리고 중괄호 안에 리턴()
+        ) 
     })}
       </div>
     </div>
@@ -88,7 +88,7 @@ function App() {
             <button onClick={() => removeButtonHandler(item.id)}>삭제</button>
             <button onClick={() => todoUpdateButtonHandler(item.id)}>{item.isDone ? "취소" : "완료"}</button>
           </div>
-        ) //반드시 태그 붙이기(key) 그리고 중괄호 안에 리턴()
+        ) 
     })}
       </div>
     </div>
