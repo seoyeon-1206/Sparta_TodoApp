@@ -17,7 +17,7 @@ function App() {
 
   const onSubmitHandler = () => {
     const newTodo = {
-      id: todo.length + 1,
+      id: Date.now(),  
       title,
       body,
       isDone: false
@@ -28,15 +28,15 @@ function App() {
     setBody("");
   }
 
-  const removeButtonHandler = (id) => {
-    const filteredTodo = todo.filter((todo) => todo.id != id);
+  const removeButtonHandler = (idToRemove) => {
+    const filteredTodo = todo.filter((item) => item.id !== idToRemove);
     setTodo(filteredTodo);
   }
 
-  const todoUpdateButtonHandler = (id) => {
-    const updatedTodo = todo.map((item) => {
-      if (item.id === id) {
-        return {...item, isDone: !item.isDone};
+  const todoUpdateButtonHandler = (idToUpdate) => {
+    const updatedTodo = todo.map((item) =>{
+      if(item.id === idToUpdate){
+        return {...item, isDone : !item.isDone};
       }
       return item;
     })
@@ -65,7 +65,7 @@ function App() {
     <div>
       <h3>Working</h3>
       <div className='working-list'>
-      {todo.filter((item) => !item.isDone).map((item) => {
+      {todo.filter((item)=> !item.isDone).map((item) => {
         return(
           <div key={item.id} className='todo-style'>
             <h1>{item.title}</h1>
@@ -80,18 +80,17 @@ function App() {
 
     <div>
       <h3>Done</h3>
-      {todo.filter((item) => item.isDone).map((item) => {
+      {todo.filter((item)=> item.isDone).map((item) => {
         return(
           <div key={item.id} className='todo-style'>
             <h1>{item.title}</h1>
             <p>{item.body}</p>
             <button onClick={() => removeButtonHandler(item.id)}>삭제</button>
-            <button onClick={() => todoUpdateButtonHandler(item.id)}>{item.isDone ? "취소": "완료"}</button>
+            <button onClick={() => todoUpdateButtonHandler(item.id)}>{item.isDone ? "취소" : "완료"}</button>
           </div>
         ) //반드시 태그 붙이기(key) 그리고 중괄호 안에 리턴()
     })}
       </div>
-
     </div>
   );
 }
