@@ -1,6 +1,7 @@
 import React from 'react'
+import { useState } from 'react';
 
-export default function Input({useState, setTodo, todo}) {
+export default function Input({setTodo, todo}) {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
 
